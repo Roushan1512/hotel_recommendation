@@ -3,3 +3,4 @@ ReviewData.csv
 hotelModel2.pkl
 hotelModelPickle.pkl
 *.pyc
+/hotels
