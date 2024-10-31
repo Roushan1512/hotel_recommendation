@@ -47,3 +47,9 @@ def methodRoute():
 
 if __name__ == "__main__":
     app.run(debug=True,port=5000)
+
+
+# cd serverside
+# virtual env  =    python -m venv hotels
+# activate = hotels\Scripts\Activate
+# install = pip install -r reqs.txt
