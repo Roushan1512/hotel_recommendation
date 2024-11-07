@@ -13,25 +13,24 @@ const Nav = () => {
         <div className=" flex justify-center items-center gap-3 font-mono font-semibold text-lg">
           <div>
             {user ? (
-              <div>
-                <button>
+              <div className="flex justify-center items-center gap-6">
+                <div className="flex flex-col justify-center items-center">
+                  <img
+                    src={user.picture}
+                    alt={user.name}
+                    className="rounded-full w-10"
+                  />
+                  <h2>{user.name}</h2>
+                </div>
+                <button className=" bg-[#C3A983] rounded-lg p-1 px-2 hover:bg-[#D5B990]">
                   <a href="/api/auth/logout">Logout</a>
                 </button>
-                <img src={user.picture} alt={user.name} />
-                <h2>{user.name}</h2>
               </div>
             ) : (
-              <button>
+              <button className=" bg-[#C3A983] rounded-lg p-1 px-2 hover:bg-[#D5B990]">
                 <a href="/api/auth/login">Login</a>
               </button>
             )}
-          </div>
-          <div>
-            <img
-              src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt=""
-              className=" rounded-full w-12"
-            />
           </div>
         </div>
       </nav>
