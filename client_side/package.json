@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "ngrok http 3000"
   },
   "dependencies": {
     "@auth0/nextjs-auth0": "^3.5.0",
@@ -16,6 +17,7 @@
     "lucide": "^0.433.0",
     "motion": "^10.18.0",
     "next": "14.2.5",
+    "ngrok": "^5.0.0-beta.2",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.3.0"
