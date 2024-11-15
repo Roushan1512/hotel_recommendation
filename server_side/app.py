@@ -48,7 +48,7 @@ def methodRoute():
 if __name__ == "__main__":
     app.run(debug=True,port=5000)
 
-
+# cmd, not powershell
 # cd serverside
 # virtual env  =    python -m venv hotels
 # activate = hotels\Scripts\Activate
