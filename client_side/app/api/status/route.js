@@ -1,6 +1,8 @@
-import ConnectDB from "@/db/db";
+import ConnectDB from "@/database/db";
 
 export const GET = async () => {
-  await ConnectDB();
-  return new Response("API OK");
+  const db = await ConnectDB();
+  const query = "show databases;";
+  const [res] = await db.query(query);
+  return Response.json(res);
 };

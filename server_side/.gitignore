@@ -4,3 +4,5 @@ hotelModel2.pkl
 hotelModelPickle.pkl
 *.pyc
 /hotels
+.env
+.env.local

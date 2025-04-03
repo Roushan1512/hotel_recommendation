@@ -49,7 +49,7 @@ const page = () => {
     };
     console.log(data);
     await axios
-      .post("http://localhost:5000/findHotel4", data)
+      .post(`${process.env.NEXT_PUBLIC_APIURL}/findHotel4`, data)
       .then((res) => {
         console.log(res.data);
         setResult(res.data);
@@ -65,7 +65,7 @@ const page = () => {
     };
     console.log(data);
     await axios
-      .post("http://localhost:5000/hotelCountry", data)
+      .post(`${process.env.NEXT_PUBLIC_APIURL}/hotelCountry`, data)
       .then((res) => {
         console.log(res.data);
         setCountryHotel(res.data);
