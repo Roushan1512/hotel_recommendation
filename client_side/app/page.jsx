@@ -10,8 +10,10 @@ import Card from "@/components/Card";
 import Card2 from "@/components/Card2";
 import { motion } from "framer-motion";
 import { GoPerson } from "react-icons/go";
+import { useUser } from "@auth0/nextjs-auth0/client";
 
 const page = () => {
+  const {user, error, isLoading} = useUser();
   // setting range
   const [fromNum, setFromNum] = useState(0);
   const [toNum, setToNum] = useState(0);
@@ -55,6 +57,9 @@ const page = () => {
         setResult(res.data);
       })
       .catch((e) => console.log(e));
+
+    console.log(user ? user : "guest");
+
   };
 
   const hotelCountry = async (country) => {
@@ -71,6 +76,8 @@ const page = () => {
         setCountryHotel(res.data);
       })
       .catch((e) => console.log(e));
+    
+      await axios.post("/api/newsearch",)
   };
 
   const displayCountry = (country) => {
