@@ -13,7 +13,7 @@ import { GoPerson } from "react-icons/go";
 import { useUser } from "@auth0/nextjs-auth0/client";
 
 const page = () => {
-  const {user, error, isLoading} = useUser();
+  const { user, error, isLoading } = useUser();
   // setting range
   const [fromNum, setFromNum] = useState(0);
   const [toNum, setToNum] = useState(0);
@@ -58,8 +58,21 @@ const page = () => {
       })
       .catch((e) => console.log(e));
 
-    console.log(user ? user : "guest");
-
+    const userData = {
+      id: user ? user.email : "guest",
+      name: user ? user.name : "guest",
+      country: country,
+      sortBy: sort,
+      stars: stars,
+      fromNum: fromNum,
+      toNum: toNum,
+      description: text,
+    };
+    console.log(userData);
+    await axios
+      .post("/api/newsearch", userData)
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
   };
 
   const hotelCountry = async (country) => {
@@ -76,8 +89,8 @@ const page = () => {
         setCountryHotel(res.data);
       })
       .catch((e) => console.log(e));
-    
-      await axios.post("/api/newsearch",)
+
+    await axios.post("/api/newsearch");
   };
 
   const displayCountry = (country) => {
