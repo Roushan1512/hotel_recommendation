@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import img from "../public/room2.jpg";
 import hotel1 from "../public/room.jpg";
@@ -35,6 +35,19 @@ const page = () => {
   //country name
   const [countryName, setCountryName] = useState("");
 
+  useEffect(() => {
+    const postUser = async () => {
+      if (user) {
+        console.log("Calling New User");
+        await axios
+          .post("/api/users/new", user)
+          .then((res) => console.log(res.data))
+          .catch((err) => console.log(err));
+      }
+    };
+    postUser();
+  }, [user]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (fromNum > toNum || toNum < 1) {
@@ -59,7 +72,7 @@ const page = () => {
       .catch((e) => console.log(e));
 
     const userData = {
-      id: user ? user.email : "guest",
+      email: user ? user.email : "guest",
       name: user ? user.name : "guest",
       country: country,
       sortBy: sort,
@@ -69,6 +82,7 @@ const page = () => {
       description: text,
     };
     console.log(userData);
+    console.log(user);
     await axios
       .post("/api/newsearch", userData)
       .then((res) => console.log(res.data))
