@@ -53,3 +53,4 @@ if __name__ == "__main__":
 # virtual env  =    python -m venv hotels
 # activate = hotels\Scripts\Activate
 # install = pip install -r reqs.txt
+# start = python app.py
