@@ -16,8 +16,8 @@ const Nav = () => {
         <div className=" flex justify-center items-center gap-3 font-mono font-semibold text-lg">
           <div>
             {user ? (
-              <Link href={`/profile/${user.sub}`}>
-                <div className="flex justify-center items-center gap-6">
+              <div className="flex justify-center items-center gap-6">
+                <Link href={`/profile/${user.sid}`}>
                   <div className="flex flex-col justify-center items-center">
                     <img
                       src={user.picture}
@@ -26,11 +26,11 @@ const Nav = () => {
                     />
                     <h2>{user.name}</h2>
                   </div>
-                  <button className=" bg-[#C3A983] rounded-lg p-1 px-2 hover:bg-[#D5B990]">
-                    <a href="/api/auth/logout">Logout</a>
-                  </button>
-                </div>
-              </Link>
+                </Link>
+                <button className=" bg-[#C3A983] rounded-lg p-1 px-2 hover:bg-[#D5B990]">
+                  <a href="/api/auth/logout">Logout</a>
+                </button>
+              </div>
             ) : (
               <button className=" bg-[#C3A983] rounded-lg p-1 px-2 hover:bg-[#D5B990]">
                 <a href="/api/auth/login">Login</a>
