@@ -1,9 +1,26 @@
 "use client";
 import { useUser } from "@auth0/nextjs-auth0/client";
+import { useEffect } from "react";
+import axios from "axios";
 
 export default function ProfilePage({ params }) {
   const { user, isLoading, error } = useUser();
   const { id } = params;
+
+  useEffect(() => {
+    const getUserSearches = async () => {
+      if (user) {
+        const { sid } = user;
+        await axios
+          .get(`/api/search/getById/${sid}`)
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => console.log(err));
+      }
+    };
+    getUserSearches();
+  }, [user]);
 
   if (isLoading) return <div className="text-center mt-10">Loading...</div>;
   if (error)

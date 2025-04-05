@@ -6,7 +6,7 @@ export const POST = async (req) => {
   const { sid, email, name, picture } = data;
   const userSearch = `select * from users where sid = '${sid}'`;
   const userExist = await db.query(userSearch);
-  console.log("USEREXIST", userExist[0]);
+  console.log("User Exists");
   if (userExist[0].length > 0) {
     return new Response("User Already Exists");
   } else {

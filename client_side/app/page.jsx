@@ -68,25 +68,28 @@ const page = () => {
       .then((res) => {
         console.log(res.data);
         setResult(res.data);
+        const updateSearch = async () => {
+          const userData = {
+            sid: user ? user.sid : "guest",
+            email: user ? user.email : "guest",
+            name: user ? user.name : "guest",
+            country: country,
+            sortBy: sort,
+            stars: stars,
+            fromNum: fromNum,
+            toNum: toNum,
+            description: text,
+          };
+          console.log(userData);
+          console.log(user);
+          await axios
+            .post("/api/search/new", userData)
+            .then((res) => console.log(res.data))
+            .catch((err) => console.log(err));
+        };
+        updateSearch();
       })
       .catch((e) => console.log(e));
-
-    const userData = {
-      email: user ? user.email : "guest",
-      name: user ? user.name : "guest",
-      country: country,
-      sortBy: sort,
-      stars: stars,
-      fromNum: fromNum,
-      toNum: toNum,
-      description: text,
-    };
-    console.log(userData);
-    console.log(user);
-    await axios
-      .post("/api/newsearch", userData)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.log(err));
   };
 
   const hotelCountry = async (country) => {
