@@ -1,11 +1,40 @@
 "use client";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function ProfilePage({ params }) {
   const { user, isLoading, error } = useUser();
   const { id } = params;
+  const [searches, setSearches] = useState([]);
+
+  const countryMapping = {
+    UK: "United Kingdom",
+    FR: "France",
+    NL: "Netherlands",
+    ES: "Spain",
+    IT: "Italy",
+    AT: "Austria",
+  };
+
+  const sortMapping = {
+    0: "Hotel Rating",
+    1: "Customer Review Score",
+    2: "Price Per Night",
+  };
+
+  const formatDate = (dateString) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+      hour: "2-digit",
+      minute: "2-digit",
+    };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", options);
+  };
 
   useEffect(() => {
     const getUserSearches = async () => {
@@ -14,7 +43,8 @@ export default function ProfilePage({ params }) {
         await axios
           .get(`/api/search/getById/${sid}`)
           .then((res) => {
-            console.log(res.data);
+            setSearches(res.data); // Save the data to state.
+            console.log(res.data); // Log the data to the console.
           })
           .catch((err) => console.log(err));
       }
@@ -50,22 +80,24 @@ export default function ProfilePage({ params }) {
           🔍 Recent Searches
         </h2>
         <ul className="space-y-4 text-[#3f3f3f]">
-          <li className="bg-[#f1dbc0] px-4 py-2 rounded-lg shadow-sm border-l-4 border-[#C3A983]">
-            📍Netherlands ⭐4 Stars 🔃Customer Review Score 💲200 - 2000
-            💬Habibi
-          </li>
-          <li className="bg-[#f1dbc0] px-4 py-2 rounded-lg shadow-sm border-l-4 border-[#C3A983]">
-            📍Netherlands ⭐4 Stars 🔃Customer Review Score 💲200 - 2000
-            💬Habibi
-          </li>
-          <li className="bg-[#f1dbc0] px-4 py-2 rounded-lg shadow-sm border-l-4 border-[#C3A983]">
-            📍Netherlands ⭐4 Stars 🔃Customer Review Score 💲200 - 2000
-            💬Habibi
-          </li>
-          <li className="bg-[#f1dbc0] px-4 py-2 rounded-lg shadow-sm border-l-4 border-[#C3A983]">
-            📍Netherlands ⭐4 Stars 🔃Customer Review Score 💲200 - 2000
-            💬Habibi
-          </li>
+          {searches.length > 0 ? (
+            searches.map((search, index) => (
+              <li
+                key={index}
+                className="bg-[#f1dbc0] px-4 py-2 rounded-lg shadow-sm border-l-4 border-[#C3A983] font-medium"
+              >
+                📍{countryMapping[search.country] || search.country} ⭐
+                {search.stars == 0 ? "Any" : search.stars} 🔃
+                {sortMapping[search.sortBy]} 💲
+                {search.fromNum} - {search.toNum} 💬{search.description}
+                <div className="font-thin">
+                  {formatDate(search.created_at || "2025-04-14T13:23:47.000Z")}
+                </div>
+              </li>
+            ))
+          ) : (
+            <li className="text-center">No recent searches found</li>
+          )}
         </ul>
       </div>
     </div>
