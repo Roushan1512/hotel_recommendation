@@ -303,9 +303,8 @@ const page = () => {
             ))}
           </div>
         </div>
-        {/*  */}
+
         {/* third */}
-        {/*  */}
         <div className="h-[120vh] flex flex-col justify-center items-center w-full gap-5">
           <h1 className="text-5xl font-bold text-[#291F0F] font-sans">
             Popular Destination

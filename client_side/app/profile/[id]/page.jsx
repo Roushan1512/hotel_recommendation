@@ -66,7 +66,7 @@ export default function ProfilePage({ params }) {
       {/* Profile Card */}
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg flex flex-col items-center py-10 px-6 mb-10">
         <img
-          src={user.picture}
+          src={user.picture ? user.picture : "@/assets/default_profilePic.jpg"}
           alt={user.name}
           className="rounded-full w-32 h-32 object-cover border-4 border-[#C3A983] shadow-md"
         />
