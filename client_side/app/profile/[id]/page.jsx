@@ -39,9 +39,9 @@ export default function ProfilePage({ params }) {
   useEffect(() => {
     const getUserSearches = async () => {
       if (user) {
-        const { sid } = user;
+        const { email } = user;
         await axios
-          .get(`/api/search/getById/${sid}`)
+          .get(`/api/search/getById/${email}`)
           .then((res) => {
             setSearches(res.data); // Save the data to state.
             console.log(res.data); // Log the data to the console.
@@ -60,16 +60,18 @@ export default function ProfilePage({ params }) {
       </div>
     );
   if (!user) return <div className="text-center mt-10">User not logged in</div>;
-
+  console.log(user.picture);
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#ECE3D4] to-[#FAF9F6] flex flex-col items-center px-4 py-10">
       {/* Profile Card */}
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-lg flex flex-col items-center py-10 px-6 mb-10">
-        <img
-          src={user.picture ? user.picture : "@/assets/default_profilePic.jpg"}
-          alt={user.name}
-          className="rounded-full w-32 h-32 object-cover border-4 border-[#C3A983] shadow-md"
-        />
+        <div className="rounded-full w-32 h-32 object-cover border-4 border-[#C3A983] shadow-md overflow-hidden">
+          <img
+            src="https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
+            alt={user.name}
+            className="w-full h-full object-cover"
+          />
+        </div>
         <h1 className="text-2xl font-bold text-[#1A1A1A] mt-4">{user.name}</h1>
         <p className="text-gray-600">{user.email}</p>
       </div>

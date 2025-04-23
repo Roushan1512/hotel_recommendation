@@ -20,7 +20,7 @@ const Nav = () => {
                 <Link href={`/profile/${user.sid}`}>
                   <div className="flex flex-col justify-center items-center">
                     <img
-                      src={user.picture}
+                      src="https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
                       alt={user.name}
                       className="rounded-full w-10"
                     />
